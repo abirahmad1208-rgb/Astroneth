@@ -3,114 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Astroneth Service</title>
+
+<title>Astroneth</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
 body{
-  font-family:Arial,sans-serif;
-  background:#07111f;
-  color:#fff;
+margin:0;
+font-family:Arial,sans-serif;
+background:#061222;
+color:#fff;
 }
+
 header{
-  position:sticky;top:0;z-index:10;
-  background:rgba(7,17,31,.92);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #18304d;
-  padding:18px 7%;
-  display:flex;justify-content:space-between;align-items:center
+position:sticky;
+top:0;
+z-index:10;
+background:#081a2cdd;
+backdrop-filter:blur(12px);
+border-bottom:1px solid #21405f;
 }
-.logo{font-size:24px;font-weight:bold;color:#48a9ff}
+
+nav{
+max-width:1100px;
+margin:auto;
+padding:18px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:25px;
+font-weight:bold;
+color:#38a1ff;
+}
+
 nav a{
-  color:#fff;text-decoration:none;margin-left:20px;
-  opacity:.85
+color:#fff;
+text-decoration:none;
+margin-left:20px;
 }
+
 .hero{
-  min-height:70vh;
-  display:flex;align-items:center;
-  padding:70px 7%;
-  background:radial-gradient(circle at 80% 20%,#123b66 0,#07111f 45%)
+min-height:75vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:50px 20px;
+background:
+radial-gradient(circle at 50% 20%,#103d69 0,#061222 55%);
 }
-.hero h1{font-size:clamp(42px,7vw,78px);margin-bottom:20px}
-.hero h1 span{color:#48a9ff}
+
+.hero h1{
+font-size:55px;
+margin:10px;
+}
+
+.hero h1 span{
+color:#2c9aff;
+}
+
 .hero p{
-  max-width:650px;color:#aebed0;
-  font-size:18px;line-height:1.8
+font-size:19px;
+color:#b9cbe0;
+max-width:650px;
+margin:20px auto;
+line-height:1.7;
 }
-.btn{
-  display:inline-block;margin-top:28px;
-  padding:14px 25px;border-radius:10px;
-  background:#168cff;color:white;
-  text-decoration:none;border:0;cursor:pointer;
-  font-size:16px;font-weight:bold
+
+button{
+background:#168cff;
+color:#fff;
+border:0;
+border-radius:9px;
+padding:13px 22px;
+font-weight:bold;
+cursor:pointer;
 }
-section{padding:80px 7%}
-.title{text-align:center;margin-bottom:45px}
-.title h2{font-size:38px}
-.title p{color:#8fa4bb;margin-top:10px}
+
+button:hover{
+background:#0874dc;
+}
+
+section{
+max-width:1100px;
+margin:auto;
+padding:70px 20px;
+}
+
+.title{
+text-align:center;
+margin-bottom:35px;
+}
+
+.title h2{
+font-size:35px;
+}
+
+.title p{
+color:#9fb3c8;
+}
+
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:22px;
 }
+
 .card{
-  background:#0c1b2d;
-  border:1px solid #1b3857;
-  border-radius:18px;
-  overflow:hidden;
-  transition:.25s
+background:#0b1d30;
+border:1px solid #234764;
+border-radius:17px;
+overflow:hidden;
+transition:.2s;
 }
+
 .card:hover{
-  transform:translateY(-5px);
-  border-color:#168cff
+transform:translateY(-5px);
+border-color:#258fe5;
 }
+
 .card img{
-  width:100%;height:180px;object-fit:cover;
-  background:#10243a
+width:100%;
+height:180px;
+object-fit:cover;
 }
-.card-body{padding:22px}
-.card h3{font-size:22px;margin-bottom:10px}
-.card p{color:#9fb1c5;line-height:1.6}
-.details{
-  display:none;
-  min-height:70vh;
-  padding:70px 7%
+
+.card-body{
+padding:22px;
 }
-.details img{
-  width:100%;max-width:700px;
-  border-radius:18px;margin:25px 0
+
+.card h3{
+font-size:22px;
 }
-.details p{
-  color:#b7c5d4;
-  line-height:1.9;
-  max-width:850px
+
+.card p{
+color:#a9bdd1;
+line-height:1.6;
 }
-.features{
-  margin:25px 0;
-  padding-left:20px;
-  color:#b7c5d4;
-  line-height:2
-}
-.about{
-  background:#09192a;
-  text-align:center
-}
-.about p{
-  max-width:800px;
-  margin:auto;
-  color:#aebed0;
-  line-height:1.8
-}
+
 footer{
-  padding:30px 7%;
-  text-align:center;
-  color:#71869d;
-  border-top:1px solid #18304d
+text-align:center;
+padding:35px;
+background:#081a2c;
+color:#8ea5bb;
 }
+
+#loading{
+text-align:center;
+color:#8ea5bb;
+}
+
 .empty{
-  text-align:center;
-  color:#71869d;
-  padding:40px
+text-align:center;
+padding:40px;
+color:#9db2c7;
 }
 </style>
 </head>
@@ -118,190 +170,271 @@ footer{
 <body>
 
 <header>
-  <div class="logo">ASTRONETH</div>
-  <nav>
-    <a href="#home">হোম</a>
-    <a href="#services">সার্ভিস</a>
-    <a href="#about">আমাদের সম্পর্কে</a>
-  </nav>
+
+<nav>
+
+<div class="logo">
+ASTRONETH
+</div>
+
+<div>
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#about">About</a>
+</div>
+
+</nav>
+
 </header>
 
-<main id="home">
+<main>
 
-<section class="hero">
-  <div>
-    <h1>আপনার জন্য <span>সেরা সার্ভিস</span></h1>
-    <p>
-      Astroneth-এর মাধ্যমে সহজ, দ্রুত এবং নির্ভরযোগ্য
-      ডিজিটাল সার্ভিস ব্যবহার করুন।
-    </p>
-    <a href="#services" class="btn">সার্ভিস দেখুন</a>
-  </div>
+<section class="hero" id="home">
+
+<div>
+
+<h1>
+Welcome to <span>Astroneth</span>
+</h1>
+
+<p>
+আপনার প্রয়োজনীয় ডিজিটাল সার্ভিস সহজে এবং দ্রুত ব্যবহার করুন।
+</p>
+
+<button onclick="document.getElementById('services').scrollIntoView()">
+আমাদের সার্ভিস দেখুন
+</button>
+
+</div>
+
 </section>
+
 
 <section id="services">
-  <div class="title">
-    <h2>আমাদের সার্ভিসসমূহ</h2>
-    <p>আপনার প্রয়োজন অনুযায়ী সার্ভিস বেছে নিন</p>
-  </div>
 
-  <div id="serviceGrid" class="grid">
-    <div class="empty">সার্ভিস লোড হচ্ছে...</div>
-  </div>
+<div class="title">
+
+<h2>আমাদের সার্ভিসসমূহ</h2>
+
+<p>
+আপনার প্রয়োজন অনুযায়ী আমাদের সার্ভিস বেছে নিন।
+</p>
+
+</div>
+
+<div id="loading">
+Services Loading...
+</div>
+
+<div class="grid" id="serviceGrid"></div>
+
 </section>
 
-<section id="serviceDetails" class="details">
-  <button class="btn" onclick="showServices()">← ফিরে যান</button>
 
-  <h1 id="detailTitle" style="margin-top:30px"></h1>
+<section id="about">
 
-  <img id="detailImage" src="" alt="">
+<div class="title">
 
-  <p id="detailDescription"></p>
+<h2>About Astroneth</h2>
 
-  <ul id="detailFeatures" class="features"></ul>
+<p>
+Astroneth একটি আধুনিক ডিজিটাল সার্ভিস প্ল্যাটফর্ম।
+</p>
 
-  <a id="useButton" class="btn" href="#" target="_blank">
-    ব্যবহার করে দেখুন
-  </a>
-</section>
+</div>
 
-<section id="about" class="about">
-  <div class="title">
-    <h2>আমাদের সম্পর্কে</h2>
-  </div>
-
-  <p>
-    Astroneth একটি আধুনিক ডিজিটাল সার্ভিস প্ল্যাটফর্ম।
-    আমাদের লক্ষ্য হলো ব্যবহারকারীদের জন্য সহজ এবং
-    সুন্দর অভিজ্ঞতা তৈরি করা।
-  </p>
 </section>
 
 </main>
 
+
 <footer>
-  © 2026 Astroneth. All Rights Reserved.
+© 2026 Astroneth. All Rights Reserved.
 </footer>
 
-<script type="module">
 
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-import {
-  getDatabase,
-  ref,
-  onValue
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+<script>
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAEi0TAhr6muNWqIfmESrIxXvkzv7rLWqc",
-  authDomain: "astroneth-service.firebaseapp.com",
-  databaseURL: "https://astroneth-service-default-rtdb.firebaseio.com",
-  projectId: "astroneth-service",
-  storageBucket: "astroneth-service.firebasestorage.app",
-  messagingSenderId: "893245021132",
-  appId: "1:893245021132:web:93d908b0f11933b3e1b69"
+
+apiKey: "AIzaSyAEiBa4wgxYLFvESQssy0oLO2Ir-RdIDEmuoA",
+
+authDomain: "astroneth-service.firebaseapp.com",
+
+databaseURL:
+"https://astroneth-service-default-rtdb.firebaseio.com",
+
+projectId: "astroneth-service",
+
+storageBucket:
+"astroneth-service.firebasestorage.app",
+
+messagingSenderId: "893245021132",
+
+appId:
+"1:893245021132:web:93d9086b0f11933b3e1b69"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+firebase.initializeApp(firebaseConfig);
 
-const servicesRef = ref(db,"services");
+const db = firebase.database();
 
-onValue(servicesRef,(snapshot)=>{
+db.ref("services").on("value",snapshot => {
 
-  const data=snapshot.val() || {};
-  const grid=document.getElementById("serviceGrid");
+const grid =
+document.getElementById("serviceGrid");
 
-  grid.innerHTML="";
+const loading =
+document.getElementById("loading");
 
-  const services=Object.entries(data);
+grid.innerHTML="";
 
-  if(!services.length){
-    grid.innerHTML=
-      '<div class="empty">এখনো কোনো সার্ভিস যোগ করা হয়নি।</div>';
-    return;
-  }
+loading.style.display="none";
 
-  services
-  .sort((a,b)=>(a[1].order||0)-(b[1].order||0))
-  .forEach(([id,s])=>{
+let count=0;
 
-    if(s.visible===false) return;
+snapshot.forEach(child => {
 
-    const card=document.createElement("div");
-    card.className="card";
+const s = child.val();
 
-    card.innerHTML=`
-      <img src="${s.image || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80'}">
-      <div class="card-body">
-        <h3>${escapeHTML(s.name || "Service")}</h3>
-        <p>${escapeHTML(s.shortDescription || "")}</p>
+if(s.active === false) return;
 
-        <button class="btn" onclick='openService(${JSON.stringify(s)})'>
-          বিস্তারিত দেখুন
-        </button>
-      </div>
-    `;
+count++;
 
-    grid.appendChild(card);
-  });
+const card =
+document.createElement("div");
+
+card.className="card";
+
+card.innerHTML=`
+
+${s.image ?
+`<img src="${safe(s.image)}">`
+:
+""}
+
+<div class="card-body">
+
+<h3>${safe(s.name || "")}</h3>
+
+<p>
+${safe(s.short || "")}
+</p>
+
+<button onclick='showDetails(${JSON.stringify(s)})'>
+বিস্তারিত দেখুন
+</button>
+
+</div>
+`;
+
+grid.appendChild(card);
 
 });
 
-window.openService=function(s){
+if(count===0){
 
-  document.getElementById("services").style.display="none";
-  document.getElementById("serviceDetails").style.display="block";
+grid.innerHTML=`
+<div class="empty">
+এখনো কোনো Service প্রকাশ করা হয়নি।
+</div>
+`;
 
-  document.getElementById("detailTitle").textContent=s.name || "";
+}
 
-  document.getElementById("detailImage").src=
-    s.image || "";
+});
 
-  document.getElementById("detailDescription").textContent=
-    s.fullDescription || s.shortDescription || "";
 
-  const features=
-    document.getElementById("detailFeatures");
+function showDetails(s){
 
-  features.innerHTML="";
+const old =
+document.getElementById("detailModal");
 
-  if(Array.isArray(s.features)){
-    s.features.forEach(f=>{
-      const li=document.createElement("li");
-      li.textContent=f;
-      features.appendChild(li);
-    });
-  }
+if(old) old.remove();
 
-  const button=document.getElementById("useButton");
+const modal =
+document.createElement("div");
 
-  button.textContent=s.buttonText || "ব্যবহার করে দেখুন";
-  button.href=s.useUrl || "#";
+modal.id="detailModal";
 
-  window.scrollTo({top:0,behavior:"smooth"});
-};
+modal.style=`
+position:fixed;
+inset:0;
+z-index:999;
+background:#000b;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+`;
 
-window.showServices=function(){
+modal.innerHTML=`
 
-  document.getElementById("serviceDetails").style.display="none";
-  document.getElementById("services").style.display="block";
+<div style="
+max-width:650px;
+width:100%;
+max-height:90vh;
+overflow:auto;
+background:#0b1d30;
+border:1px solid #315579;
+border-radius:18px;
+padding:25px;
+">
 
-  location.hash="services";
-};
+${s.image ?
+`<img src="${safe(s.image)}"
+style="width:100%;max-height:300px;object-fit:cover;border-radius:12px">`
+:
+""}
 
-function escapeHTML(text){
+<h2>${safe(s.name || "")}</h2>
 
-  return String(text)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+<p style="
+color:#b6c8da;
+line-height:1.8;
+white-space:pre-line;
+">
+${safe(s.full || s.short || "")}
+</p>
+
+<div>
+
+${s.url ?
+`<button onclick="window.open('${safe(s.url)}','_blank')">
+${safe(s.button || "ব্যবহার করে দেখুন")}
+</button>`
+:
+""}
+
+<button
+style="background:#334b63"
+onclick="document.getElementById('detailModal').remove()">
+বন্ধ করুন
+</button>
+
+</div>
+
+</div>
+`;
+
+document.body.appendChild(modal);
+
+}
+
+
+function safe(text){
+
+return String(text)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
 }
 
 </script>
