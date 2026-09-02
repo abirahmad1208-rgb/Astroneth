@@ -2,440 +2,1724 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Astroneth</title>
+<title>Astroneth — Digital Services</title>
 
 <style>
-*{box-sizing:border-box}
 
-html{scroll-behavior:smooth}
+/* =========================
+   RESET
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#061222;
-color:#fff;
+  font-family:Arial, sans-serif;
+  background:#030b17;
+  color:#fff;
+  overflow-x:hidden;
 }
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  top:-180px;
+  left:-180px;
+  background:#168cff;
+  opacity:.10;
+  filter:blur(120px);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  right:-200px;
+  bottom:-200px;
+  background:#0066ff;
+  opacity:.10;
+  filter:blur(130px);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:-2;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
 
 header{
-position:sticky;
-top:0;
-z-index:10;
-background:#081a2cdd;
-backdrop-filter:blur(12px);
-border-bottom:1px solid #21405f;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+
+  background:rgba(3,11,23,.75);
+  backdrop-filter:blur(18px);
+
+  border-bottom:1px solid rgba(80,160,255,.15);
 }
 
-nav{
-max-width:1100px;
-margin:auto;
-padding:18px 20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+.navbar{
+  max-width:1150px;
+  margin:auto;
+
+  height:76px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 20px;
 }
 
 .logo{
-font-size:25px;
-font-weight:bold;
-color:#38a1ff;
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:1px;
+
+  color:#fff;
 }
 
-nav a{
-color:#fff;
-text-decoration:none;
-margin-left:20px;
+.logo span{
+  color:#2998ff;
 }
+
+.nav-links{
+  display:flex;
+  gap:30px;
+}
+
+.nav-links a{
+  color:#d9e7f7;
+  text-decoration:none;
+  font-size:15px;
+  transition:.3s;
+}
+
+.nav-links a:hover{
+  color:#2998ff;
+}
+
+.menu-btn{
+  display:none;
+
+  border:1px solid #245477;
+  background:#0b1c30;
+  color:#fff;
+
+  border-radius:8px;
+  padding:9px 12px;
+
+  cursor:pointer;
+}
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
-min-height:75vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:50px 20px;
-background:
-radial-gradient(circle at 50% 20%,#103d69 0,#061222 55%);
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+
+  padding:120px 20px 70px;
+
+  position:relative;
+}
+
+.hero-container{
+  max-width:1150px;
+  width:100%;
+  margin:auto;
+
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+
+  gap:50px;
+  align-items:center;
+}
+
+.hero-content{
+  animation:heroIn 1s ease forwards;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:8px 14px;
+
+  border:1px solid rgba(41,152,255,.3);
+  border-radius:50px;
+
+  background:rgba(20,90,160,.12);
+
+  color:#7fc4ff;
+  font-size:14px;
+
+  margin-bottom:20px;
+}
+
+.badge-dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+  background:#2998ff;
+
+  box-shadow:0 0 15px #2998ff;
+
+  animation:pulse 1.8s infinite;
 }
 
 .hero h1{
-font-size:55px;
-margin:10px;
+  font-size:clamp(42px,6vw,72px);
+  line-height:1.08;
+
+  margin-bottom:22px;
 }
 
 .hero h1 span{
-color:#2c9aff;
+  color:#2998ff;
+
+  text-shadow:
+    0 0 20px rgba(41,152,255,.35);
 }
 
 .hero p{
-font-size:19px;
-color:#b9cbe0;
-max-width:650px;
-margin:20px auto;
-line-height:1.7;
+  max-width:650px;
+
+  color:#9fb4c9;
+  font-size:18px;
+  line-height:1.8;
+
+  margin-bottom:30px;
 }
 
-button{
-background:#168cff;
-color:#fff;
-border:0;
-border-radius:9px;
-padding:13px 22px;
-font-weight:bold;
-cursor:pointer;
+.hero-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
-button:hover{
-background:#0874dc;
+.primary-btn,
+.secondary-btn{
+  text-decoration:none;
+
+  padding:14px 23px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+
+  transition:.3s;
 }
+
+.primary-btn{
+  color:#fff;
+
+  background:#168cff;
+
+  box-shadow:
+    0 10px 30px rgba(22,140,255,.25);
+}
+
+.primary-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 15px 35px rgba(22,140,255,.4);
+}
+
+.secondary-btn{
+  color:#c9e4ff;
+
+  border:1px solid #285477;
+
+  background:rgba(10,30,50,.6);
+}
+
+.secondary-btn:hover{
+  border-color:#2998ff;
+  color:#fff;
+  transform:translateY(-3px);
+}
+
+
+/* =========================
+   HERO VISUAL
+========================= */
+
+.hero-visual{
+  position:relative;
+  min-height:440px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  animation:floatIn 1.2s ease forwards;
+}
+
+.orb{
+  position:absolute;
+
+  width:330px;
+  height:330px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(41,152,255,.22),
+      rgba(0,40,90,.08) 50%,
+      transparent 70%
+    );
+
+  filter:blur(1px);
+
+  animation:orbFloat 5s ease-in-out infinite;
+}
+
+.orbit{
+  position:absolute;
+
+  width:330px;
+  height:120px;
+
+  border:1px solid rgba(41,152,255,.35);
+
+  border-radius:50%;
+
+  transform:rotate(-25deg);
+
+  animation:orbitSpin 8s linear infinite;
+}
+
+.orbit.two{
+  transform:rotate(55deg);
+  animation-duration:11s;
+}
+
+.dashboard-card{
+  position:relative;
+  z-index:2;
+
+  width:350px;
+
+  padding:25px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,45,75,.92),
+      rgba(5,18,32,.92)
+    );
+
+  border:1px solid rgba(76,160,230,.3);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.45),
+    0 0 50px rgba(20,120,220,.12);
+
+  animation:cardFloat 4s ease-in-out infinite;
+}
+
+.dashboard-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:25px;
+}
+
+.dashboard-title{
+  color:#9fc8ed;
+  font-size:13px;
+}
+
+.dashboard-icon{
+  width:35px;
+  height:35px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:9px;
+
+  background:#0d3153;
+  color:#45a9ff;
+}
+
+.fake-chart{
+  height:130px;
+
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+
+  padding:15px;
+
+  border-radius:12px;
+
+  background:rgba(2,13,25,.65);
+}
+
+.bar{
+  flex:1;
+
+  border-radius:6px 6px 2px 2px;
+
+  background:linear-gradient(
+    to top,
+    #0965b8,
+    #43aaff
+  );
+
+  box-shadow:0 0 15px rgba(41,152,255,.25);
+
+  animation:barPulse 2s ease-in-out infinite;
+}
+
+.bar:nth-child(1){height:40%}
+.bar:nth-child(2){height:65%;animation-delay:.2s}
+.bar:nth-child(3){height:50%;animation-delay:.4s}
+.bar:nth-child(4){height:85%;animation-delay:.6s}
+.bar:nth-child(5){height:70%;animation-delay:.8s}
+.bar:nth-child(6){height:95%;animation-delay:1s}
+
+.dashboard-bottom{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  gap:10px;
+
+  margin-top:15px;
+}
+
+.mini-card{
+  padding:13px;
+
+  background:rgba(7,25,43,.8);
+
+  border:1px solid #183a59;
+
+  border-radius:10px;
+}
+
+.mini-card small{
+  color:#718ca5;
+}
+
+.mini-card strong{
+  display:block;
+  margin-top:5px;
+  color:#fff;
+}
+
+
+/* =========================
+   SECTION
+========================= */
 
 section{
-max-width:1100px;
-margin:auto;
-padding:70px 20px;
+  padding:100px 20px;
 }
 
-.title{
-text-align:center;
-margin-bottom:35px;
+.section-container{
+  max-width:1150px;
+  margin:auto;
 }
 
-.title h2{
-font-size:35px;
+.section-head{
+  text-align:center;
+  margin-bottom:50px;
 }
 
-.title p{
-color:#9fb3c8;
+.section-head .small{
+  color:#2998ff;
+  font-size:14px;
+  font-weight:bold;
+
+  letter-spacing:2px;
+
+  margin-bottom:12px;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:22px;
+.section-head h2{
+  font-size:40px;
+  margin-bottom:14px;
 }
 
-.card{
-background:#0b1d30;
-border:1px solid #234764;
-border-radius:17px;
-overflow:hidden;
-transition:.2s;
+.section-head p{
+  color:#8198ad;
+  max-width:600px;
+  margin:auto;
+  line-height:1.7;
 }
 
-.card:hover{
-transform:translateY(-5px);
-border-color:#258fe5;
+
+/* =========================
+   SERVICES
+========================= */
+
+#services{
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(7,28,48,.35),
+      transparent
+    );
 }
 
-.card img{
-width:100%;
-height:180px;
-object-fit:cover;
+.services-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+  gap:22px;
 }
 
-.card-body{
-padding:22px;
+.service-card{
+  position:relative;
+
+  padding:28px;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(12,34,55,.9),
+      rgba(6,20,34,.9)
+    );
+
+  border:1px solid #193c5a;
+
+  transition:
+    transform .35s,
+    border-color .35s,
+    box-shadow .35s;
+
+  overflow:hidden;
+
+  opacity:0;
+  transform:translateY(35px);
 }
 
-.card h3{
-font-size:22px;
+.service-card.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
-.card p{
-color:#a9bdd1;
-line-height:1.6;
+.service-card::before{
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:-45px;
+  top:-45px;
+
+  background:#168cff;
+
+  opacity:.08;
+
+  filter:blur(30px);
+
+  border-radius:50%;
 }
+
+.service-card:hover{
+  transform:translateY(-9px) !important;
+
+  border-color:#2c91dd;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.35),
+    0 0 30px rgba(22,140,255,.1);
+}
+
+.service-icon{
+  width:55px;
+  height:55px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d4675,
+      #092943
+    );
+
+  border:1px solid #28638e;
+
+  color:#55b1ff;
+
+  font-size:24px;
+
+  margin-bottom:20px;
+}
+
+.service-card h3{
+  font-size:21px;
+  margin-bottom:10px;
+}
+
+.service-card p{
+  color:#8fa6ba;
+  line-height:1.7;
+
+  min-height:55px;
+
+  margin-bottom:20px;
+}
+
+.service-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+
+  color:#43aaff;
+  text-decoration:none;
+
+  font-weight:bold;
+
+  cursor:pointer;
+}
+
+.service-btn:hover{
+  color:#fff;
+}
+
+
+/* =========================
+   EMPTY SERVICES
+========================= */
+
+.empty-services{
+  text-align:center;
+
+  padding:60px 20px;
+
+  border:1px dashed #244866;
+
+  border-radius:18px;
+
+  color:#71899e;
+
+  background:rgba(8,24,40,.4);
+}
+
+.empty-icon{
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+
+/* =========================
+   WHY US
+========================= */
+
+.features{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+  gap:20px;
+}
+
+.feature{
+  padding:25px;
+
+  border-radius:16px;
+
+  background:#071a2b;
+
+  border:1px solid #173b59;
+
+  transition:.3s;
+}
+
+.feature:hover{
+  transform:translateY(-5px);
+  border-color:#287eb8;
+}
+
+.feature-icon{
+  font-size:27px;
+  margin-bottom:15px;
+}
+
+.feature h3{
+  margin-bottom:10px;
+}
+
+.feature p{
+  color:#8299ad;
+  line-height:1.7;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+  padding-top:40px;
+}
+
+.cta-box{
+  position:relative;
+  overflow:hidden;
+
+  padding:65px 30px;
+
+  text-align:center;
+
+  border-radius:25px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(24,116,200,.22),
+      rgba(7,26,44,.9) 60%
+    );
+
+  border:1px solid #20577f;
+}
+
+.cta-box::before{
+  content:"";
+
+  position:absolute;
+
+  width:200px;
+  height:200px;
+
+  left:-80px;
+  top:-80px;
+
+  border-radius:50%;
+
+  background:#168cff;
+
+  opacity:.08;
+
+  filter:blur(40px);
+}
+
+.cta-box h2{
+  font-size:38px;
+  margin-bottom:15px;
+}
+
+.cta-box p{
+  color:#91a9bc;
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-text-align:center;
-padding:35px;
-background:#081a2c;
-color:#8ea5bb;
+  padding:35px 20px;
+
+  border-top:1px solid #132f48;
+
+  text-align:center;
+
+  color:#667f95;
 }
 
-#loading{
-text-align:center;
-color:#8ea5bb;
+footer strong{
+  color:#2998ff;
 }
 
-.empty{
-text-align:center;
-padding:40px;
-color:#9db2c7;
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+.top-btn{
+  position:fixed;
+
+  right:22px;
+  bottom:22px;
+
+  width:45px;
+  height:45px;
+
+  border-radius:50%;
+
+  border:1px solid #27628b;
+
+  background:#0b2944;
+
+  color:#fff;
+
+  cursor:pointer;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:.3s;
+
+  z-index:500;
 }
+
+.top-btn.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.top-btn:hover{
+  background:#168cff;
+  transform:translateY(-4px);
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateX(-35px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes floatIn{
+  from{
+    opacity:0;
+    transform:translateX(35px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes cardFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-12px);
+  }
+}
+
+@keyframes orbFloat{
+  0%,100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.08);
+  }
+}
+
+@keyframes orbitSpin{
+  from{
+    transform:rotate(-25deg) rotate(0deg);
+  }
+
+  to{
+    transform:rotate(-25deg) rotate(360deg);
+  }
+}
+
+@keyframes pulse{
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  50%{
+    opacity:.4;
+    transform:scale(.7);
+  }
+}
+
+@keyframes barPulse{
+  0%,100%{
+    opacity:.65;
+  }
+
+  50%{
+    opacity:1;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+  .nav-links{
+    display:none;
+
+    position:absolute;
+
+    top:76px;
+    left:0;
+    width:100%;
+
+    flex-direction:column;
+
+    padding:20px;
+
+    background:#061526;
+
+    border-bottom:1px solid #1d4261;
+  }
+
+  .nav-links.open{
+    display:flex;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .hero-container{
+    grid-template-columns:1fr;
+
+    text-align:center;
+  }
+
+  .hero p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .hero-visual{
+    min-height:350px;
+  }
+
+  .dashboard-card{
+    width:min(350px,90vw);
+  }
+
+  .section-head h2{
+    font-size:32px;
+  }
+
+  .cta-box h2{
+    font-size:30px;
+  }
+}
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <header>
 
-<nav>
+  <div class="navbar">
 
-<div class="logo">
-ASTRONETH
-</div>
+    <div class="logo">
+      ASTRON<span>ETH</span>
+    </div>
 
-<div>
-<a href="#home">Home</a>
-<a href="#services">Services</a>
-<a href="#about">About</a>
-</div>
+    <nav class="nav-links" id="navLinks">
 
-</nav>
+      <a href="#home">হোম</a>
+
+      <a href="#services">সার্ভিসসমূহ</a>
+
+      <a href="#why">কেন আমরা</a>
+
+      <a href="#contact">যোগাযোগ</a>
+
+    </nav>
+
+    <button
+      class="menu-btn"
+      onclick="toggleMenu()"
+    >
+      ☰
+    </button>
+
+  </div>
 
 </header>
 
-<main>
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero" id="home">
 
-<div>
+  <div class="hero-container">
 
-<h1>
-Welcome to <span>Astroneth</span>
-</h1>
 
-<p>
-আপনার প্রয়োজনীয় ডিজিটাল সার্ভিস সহজে এবং দ্রুত ব্যবহার করুন।
-</p>
+    <div class="hero-content">
 
-<button onclick="document.getElementById('services').scrollIntoView()">
-আমাদের সার্ভিস দেখুন
-</button>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        ASTRONETH এ স্বাগতম
+      </div>
 
-</div>
+
+      <h1>
+        আপনার প্রয়োজনের
+        <span>ডিজিটাল সার্ভিস</span>
+        এক জায়গায়
+      </h1>
+
+
+      <p>
+        প্রয়োজন অনুযায়ী আমাদের available
+        সার্ভিসগুলো দেখুন এবং সহজেই আপনার
+        প্রয়োজনের সার্ভিস ব্যবহার করুন।
+      </p>
+
+
+      <div class="hero-buttons">
+
+        <a
+          href="#services"
+          class="primary-btn"
+        >
+          সার্ভিস দেখুন ↓
+        </a>
+
+
+        <a
+          href="#why"
+          class="secondary-btn"
+        >
+          আরও জানুন
+        </a>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- FUTURISTIC VISUAL -->
+
+    <div class="hero-visual">
+
+      <div class="orb"></div>
+
+      <div class="orbit"></div>
+
+      <div class="orbit two"></div>
+
+
+      <div class="dashboard-card">
+
+        <div class="dashboard-top">
+
+          <div>
+
+            <div class="dashboard-title">
+              ASTRONETH
+            </div>
+
+            <strong>
+              Service Overview
+            </strong>
+
+          </div>
+
+          <div class="dashboard-icon">
+            ✦
+          </div>
+
+        </div>
+
+
+        <div class="fake-chart">
+
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+
+        </div>
+
+
+        <div class="dashboard-bottom">
+
+          <div class="mini-card">
+            <small>Services</small>
+            <strong id="serviceCount">0</strong>
+          </div>
+
+          <div class="mini-card">
+            <small>Status</small>
+            <strong>Available</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
+
+
+<!-- =========================
+     SERVICES
+========================= -->
 
 <section id="services">
 
-<div class="title">
+  <div class="section-container">
 
-<h2>আমাদের সার্ভিসসমূহ</h2>
+    <div class="section-head">
 
-<p>
-আপনার প্রয়োজন অনুযায়ী আমাদের সার্ভিস বেছে নিন।
-</p>
+      <div class="small">
+        OUR SERVICES
+      </div>
 
-</div>
+      <h2>
+        আমাদের সার্ভিসসমূহ
+      </h2>
 
-<div id="loading">
-Services Loading...
-</div>
+      <p>
+        আপনার প্রয়োজন অনুযায়ী available
+        সার্ভিস বেছে নিন।
+      </p>
 
-<div class="grid" id="serviceGrid"></div>
+    </div>
+
+
+    <div
+      class="services-grid"
+      id="servicesGrid"
+    >
+
+      <div class="empty-services">
+
+        <div class="empty-icon">
+          ◌
+        </div>
+
+        <h3>
+          সার্ভিস লোড হচ্ছে...
+        </h3>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
 
-<section id="about">
 
-<div class="title">
+<!-- =========================
+     WHY US
+========================= -->
 
-<h2>About Astroneth</h2>
+<section id="why">
 
-<p>
-Astroneth একটি আধুনিক ডিজিটাল সার্ভিস প্ল্যাটফর্ম।
-</p>
+  <div class="section-container">
 
-</div>
+    <div class="section-head">
+
+      <div class="small">
+        WHY ASTRONETH
+      </div>
+
+      <h2>
+        কেন Astroneth?
+      </h2>
+
+      <p>
+        আপনার প্রয়োজন অনুযায়ী সহজ এবং
+        পরিষ্কার সার্ভিস অভিজ্ঞতা দেওয়াই
+        আমাদের লক্ষ্য।
+      </p>
+
+    </div>
+
+
+    <div class="features">
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ⚡
+        </div>
+
+        <h3>
+          সহজ ব্যবহার
+        </h3>
+
+        <p>
+          প্রয়োজনীয় সার্ভিস খুঁজে পাওয়া এবং
+          ব্যবহার করা সহজভাবে সাজানো হয়েছে।
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ◈
+        </div>
+
+        <h3>
+          পরিষ্কার তথ্য
+        </h3>
+
+        <p>
+          প্রতিটি সার্ভিসের প্রয়োজনীয়
+          তথ্য পরিষ্কারভাবে দেখানো হবে।
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ◆
+        </div>
+
+        <h3>
+          প্রয়োজন অনুযায়ী
+        </h3>
+
+        <p>
+          Admin Panel থেকে যে সার্ভিসগুলো
+          available করা হবে সেগুলোই এখানে
+          দেখানো হবে।
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ✓
+        </div>
+
+        <h3>
+          সরাসরি ব্যবহার
+        </h3>
+
+        <p>
+          কোনো সার্ভিসের ব্যবহার বাটনে
+          ক্লিক করে সরাসরি নির্ধারিত
+          destination-এ যেতে পারবেন।
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
 
 </section>
 
-</main>
 
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta" id="contact">
+
+  <div class="section-container">
+
+    <div class="cta-box">
+
+      <h2>
+        প্রয়োজনের সার্ভিস খুঁজে নিন
+      </h2>
+
+      <p>
+        আমাদের available সার্ভিসগুলো
+        দেখতে নিচের বাটনে ক্লিক করুন।
+      </p>
+
+      <a
+        href="#services"
+        class="primary-btn"
+      >
+        সার্ভিস দেখুন →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
-© 2026 Astroneth. All Rights Reserved.
+
+  <p>
+    © <span id="year"></span>
+    <strong> ASTRONETH</strong>.
+    All rights reserved.
+  </p>
+
 </footer>
 
 
+
+<!-- BACK TO TOP -->
+
+<button
+  class="top-btn"
+  id="topBtn"
+  onclick="window.scrollTo({top:0,behavior:'smooth'})"
+>
+  ↑
+</button>
+
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
 
 <script>
 
 const firebaseConfig = {
 
-apiKey: "AIzaSyAEiBa4wgxYLFvESQssy0oLO2Ir-RdIDEmuoA",
+  apiKey:
+    "AIzaSyBa4wgXLyF0SsuvsQoLQ2tIr-RdIDEmuoA",
 
-authDomain: "astroneth-service.firebaseapp.com",
+  authDomain:
+    "astroneth-service.firebaseapp.com",
 
-databaseURL:
-"https://astroneth-service-default-rtdb.firebaseio.com",
+  databaseURL:
+    "https://astroneth-service-default-rtdb.firebaseio.com",
 
-projectId: "astroneth-service",
+  projectId:
+    "astroneth-service",
 
-storageBucket:
-"astroneth-service.firebasestorage.app",
+  storageBucket:
+    "astroneth-service.firebasestorage.app",
 
-messagingSenderId: "893245021132",
+  messagingSenderId:
+    "893245021132",
 
-appId:
-"1:893245021132:web:93d9086b0f11933b3e1b69"
+  appId:
+    "1:893245021132:web:93d9d86b0f11933b3e1b69"
 
 };
+
 
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
 
-db.ref("services").on("value",snapshot => {
 
-const grid =
-document.getElementById("serviceGrid");
 
-const loading =
-document.getElementById("loading");
+/* =========================
+   LOAD SERVICES
+========================= */
 
-grid.innerHTML="";
+db.ref("services").on(
+  "value",
+  snapshot => {
 
-loading.style.display="none";
+    const grid =
+      document.getElementById(
+        "servicesGrid"
+      );
 
-let count=0;
+    grid.innerHTML = "";
 
-snapshot.forEach(child => {
 
-const s = child.val();
+    let count = 0;
 
-if(s.active === false) return;
 
-count++;
+    if(!snapshot.exists()){
 
-const card =
-document.createElement("div");
+      grid.innerHTML = `
 
-card.className="card";
+        <div class="empty-services">
 
-card.innerHTML=`
+          <div class="empty-icon">
+            ✦
+          </div>
 
-${s.image ?
-`<img src="${safe(s.image)}">`
-:
-""}
+          <h3>
+            বর্তমানে কোনো সার্ভিস নেই
+          </h3>
 
-<div class="card-body">
+          <p style="margin-top:10px">
+            নতুন সার্ভিস available হলে
+            এখানে দেখা যাবে।
+          </p>
 
-<h3>${safe(s.name || "")}</h3>
+        </div>
 
-<p>
-${safe(s.short || "")}
-</p>
+      `;
 
-<button onclick='showDetails(${JSON.stringify(s)})'>
-বিস্তারিত দেখুন
-</button>
+      document.getElementById(
+        "serviceCount"
+      ).innerText = "0";
 
-</div>
-`;
+      return;
 
-grid.appendChild(card);
+    }
 
-});
 
-if(count===0){
+    snapshot.forEach(child => {
 
-grid.innerHTML=`
-<div class="empty">
-এখনো কোনো Service প্রকাশ করা হয়নি।
-</div>
-`;
+      const s = child.val();
+
+
+      /*
+        Hidden service visitor দেখবে না
+      */
+
+      if(!s.active){
+        return;
+      }
+
+
+      count++;
+
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "service-card";
+
+
+      const image =
+        s.image
+        ?
+        `
+
+          <img
+            src="${escapeHtml(s.image)}"
+            alt="${escapeHtml(s.name || "Service")}"
+            style="
+              width:100%;
+              height:160px;
+              object-fit:cover;
+              border-radius:12px;
+              margin-bottom:20px;
+            "
+          >
+
+        `
+        :
+        `
+
+          <div class="service-icon">
+            ✦
+          </div>
+
+        `;
+
+
+      card.innerHTML = `
+
+        ${image}
+
+
+        <h3>
+          ${escapeHtml(s.name || "")}
+        </h3>
+
+
+        <p>
+          ${escapeHtml(s.short || "")}
+        </p>
+
+
+        <a
+          class="service-btn"
+          href="${escapeHtml(s.url || "#")}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          ${escapeHtml(
+            s.button || "ব্যবহার করে দেখুন"
+          )}
+
+          →
+
+        </a>
+
+      `;
+
+
+      grid.appendChild(card);
+
+
+      /*
+        Scroll animation
+      */
+
+      setTimeout(() => {
+
+        card.classList.add("show");
+
+      }, count * 100);
+
+    });
+
+
+    document.getElementById(
+      "serviceCount"
+    ).innerText = count;
+
+
+    if(count === 0){
+
+      grid.innerHTML = `
+
+        <div class="empty-services">
+
+          <div class="empty-icon">
+            ◌
+          </div>
+
+          <h3>
+            বর্তমানে কোনো সার্ভিস available নেই
+          </h3>
+
+        </div>
+
+      `;
+
+    }
+
+  },
+
+  error => {
+
+    document.getElementById(
+      "servicesGrid"
+    ).innerHTML = `
+
+      <div class="empty-services">
+
+        <div class="empty-icon">
+          ⚠
+        </div>
+
+        <h3>
+          সার্ভিস লোড করা যায়নি
+        </h3>
+
+        <p style="margin-top:10px">
+          কিছুক্ষণ পর আবার চেষ্টা করুন।
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+);
+
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(text){
+
+  return String(text)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
 
-});
 
 
-function showDetails(s){
+/* =========================
+   MOBILE MENU
+========================= */
 
-const old =
-document.getElementById("detailModal");
+function toggleMenu(){
 
-if(old) old.remove();
-
-const modal =
-document.createElement("div");
-
-modal.id="detailModal";
-
-modal.style=`
-position:fixed;
-inset:0;
-z-index:999;
-background:#000b;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-`;
-
-modal.innerHTML=`
-
-<div style="
-max-width:650px;
-width:100%;
-max-height:90vh;
-overflow:auto;
-background:#0b1d30;
-border:1px solid #315579;
-border-radius:18px;
-padding:25px;
-">
-
-${s.image ?
-`<img src="${safe(s.image)}"
-style="width:100%;max-height:300px;object-fit:cover;border-radius:12px">`
-:
-""}
-
-<h2>${safe(s.name || "")}</h2>
-
-<p style="
-color:#b6c8da;
-line-height:1.8;
-white-space:pre-line;
-">
-${safe(s.full || s.short || "")}
-</p>
-
-<div>
-
-${s.url ?
-`<button onclick="window.open('${safe(s.url)}','_blank')">
-${safe(s.button || "ব্যবহার করে দেখুন")}
-</button>`
-:
-""}
-
-<button
-style="background:#334b63"
-onclick="document.getElementById('detailModal').remove()">
-বন্ধ করুন
-</button>
-
-</div>
-
-</div>
-`;
-
-document.body.appendChild(modal);
+  document
+    .getElementById("navLinks")
+    .classList.toggle("open");
 
 }
 
 
-function safe(text){
 
-return String(text)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+/* =========================
+   CLOSE MENU AFTER CLICK
+========================= */
 
-}
+document
+  .querySelectorAll(".nav-links a")
+  .forEach(link => {
+
+    link.addEventListener(
+      "click",
+      () => {
+
+        document
+          .getElementById("navLinks")
+          .classList.remove("open");
+
+      }
+    );
+
+  });
+
+
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    const btn =
+      document.getElementById("topBtn");
+
+
+    if(window.scrollY > 500){
+
+      btn.classList.add("show");
+
+    }else{
+
+      btn.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+
+/* =========================
+   YEAR
+========================= */
+
+document.getElementById(
+  "year"
+).innerText =
+  new Date().getFullYear();
 
 </script>
 
