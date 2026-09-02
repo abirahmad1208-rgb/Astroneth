@@ -2,295 +2,735 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Astroneth Admin</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#061222;color:#fff}
-header{background:#0b1d32;border-bottom:1px solid #21405f;padding:22px}
-header h1{max-width:1100px;margin:auto;color:#38a1ff}
-.container{max-width:1100px;margin:35px auto;padding:20px}
-.card{background:#0c1e31;border:1px solid #244766;border-radius:18px;padding:25px;margin-bottom:20px}
-input,textarea{width:100%;padding:13px;margin:7px 0 16px;border-radius:8px;border:1px solid #315579;background:#071526;color:#fff}
-textarea{min-height:120px;resize:vertical}
-button{border:0;border-radius:8px;padding:12px 20px;background:#168cff;color:#fff;font-weight:bold;cursor:pointer;margin:4px}
-button:hover{background:#0874dc}
-.danger{background:#e53935}
-.hidden{display:none}
-.msg{margin-top:12px;font-weight:bold}
-.service{border:1px solid #284b69;padding:18px;border-radius:12px;margin:12px 0}
-.service img{width:100%;max-height:180px;object-fit:cover;border-radius:10px}
-.row{display:flex;gap:10px}
-.row>*{flex:1}
-@media(max-width:650px){.row{display:block}}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#061222;
+  color:#fff;
+}
+
+header{
+  background:#0b1d32;
+  border-bottom:1px solid #21405f;
+  padding:22px;
+}
+
+header h1{
+  max-width:1100px;
+  margin:auto;
+  color:#38a1ff;
+}
+
+.container{
+  max-width:1100px;
+  margin:35px auto;
+  padding:20px;
+}
+
+.card{
+  background:#0c1e31;
+  border:1px solid #244766;
+  border-radius:18px;
+  padding:25px;
+  margin-bottom:20px;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:13px;
+  margin:7px 0 16px;
+  border-radius:8px;
+  border:1px solid #315579;
+  background:#071526;
+  color:#fff;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:12px 20px;
+  background:#168cff;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  margin:4px;
+}
+
+button:hover{
+  background:#0874dc;
+}
+
+.danger{
+  background:#e53935;
+}
+
+.danger:hover{
+  background:#c62828;
+}
+
+.hidden{
+  display:none;
+}
+
+.msg{
+  margin-top:12px;
+  font-weight:bold;
+}
+
+.service{
+  border:1px solid #284b69;
+  padding:18px;
+  border-radius:12px;
+  margin:12px 0;
+}
+
+.service img{
+  width:100%;
+  max-height:180px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+}
+
+.row>*{
+  flex:1;
+}
+
+@media(max-width:650px){
+  .row{
+    display:block;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>ASTRONETH ADMIN</h1>
+  <h1>ASTRONETH ADMIN</h1>
 </header>
 
 <div class="container">
 
 <!-- LOGIN -->
 <div id="loginBox" class="card">
-<h2>Admin Login</h2>
 
-<label>Email</label>
-<input id="email" type="email" placeholder="Admin Email">
+  <h2>Admin Login</h2>
 
-<label>Password</label>
-<input id="password" type="password" placeholder="Password">
+  <label>Email</label>
+  <input
+    id="email"
+    type="email"
+    placeholder="Admin Email"
+  >
 
-<button onclick="login()">Login</button>
+  <label>Password</label>
+  <input
+    id="password"
+    type="password"
+    placeholder="Password"
+  >
 
-<div id="loginMsg" class="msg"></div>
+  <button onclick="login()">Login</button>
+
+  <div id="loginMsg" class="msg"></div>
+
 </div>
 
-<!-- ADMIN -->
+
+<!-- ADMIN PANEL -->
 <div id="adminBox" class="hidden">
 
-<div class="card">
-<h2>Dashboard</h2>
-<p id="adminEmail"></p>
-<button onclick="logout()">Logout</button>
+  <div class="card">
+
+    <h2>Dashboard</h2>
+
+    <p id="adminEmail"></p>
+
+    <button onclick="logout()">Logout</button>
+
+  </div>
+
+
+  <!-- ADD SERVICE -->
+  <div class="card">
+
+    <h2>নতুন Service যোগ করুন</h2>
+
+    <label>Service Name</label>
+
+    <input
+      id="name"
+      placeholder="যেমন: Web Development"
+    >
+
+
+    <label>Short Description</label>
+
+    <textarea
+      id="short"
+      placeholder="ছোট description"
+    ></textarea>
+
+
+    <label>Full Description</label>
+
+    <textarea
+      id="full"
+      placeholder="সম্পূর্ণ description"
+    ></textarea>
+
+
+    <label>Image URL</label>
+
+    <input
+      id="image"
+      placeholder="https://example.com/image.jpg"
+    >
+
+
+    <label>Button Text</label>
+
+    <input
+      id="button"
+      value="ব্যবহার করে দেখুন"
+    >
+
+
+    <label>Destination URL</label>
+
+    <input
+      id="url"
+      placeholder="https://example.com"
+    >
+
+
+    <button onclick="addService()">
+      Service Add করুন
+    </button>
+
+    <div id="addMsg" class="msg"></div>
+
+  </div>
+
+
+  <!-- SERVICES -->
+  <div class="card">
+
+    <h2>বর্তমান Services</h2>
+
+    <div id="services">
+      Loading...
+    </div>
+
+  </div>
+
 </div>
 
-<div class="card">
-<h2>নতুন Service যোগ করুন</h2>
-
-<label>Service Name</label>
-<input id="name" placeholder="যেমন: Web Development">
-
-<label>Short Description</label>
-<textarea id="short" placeholder="ছোট description"></textarea>
-
-<label>Full Description</label>
-<textarea id="full" placeholder="সম্পূর্ণ description"></textarea>
-
-<label>Image URL</label>
-<input id="image" placeholder="https://example.com/image.jpg">
-
-<label>Button Text</label>
-<input id="button" value="ব্যবহার করে দেখুন">
-
-<label>Destination URL</label>
-<input id="url" placeholder="https://example.com">
-
-<button onclick="addService()">Service Add করুন</button>
-
-<div id="addMsg" class="msg"></div>
 </div>
 
-<div class="card">
-<h2>বর্তমান Services</h2>
-<div id="services">Loading...</div>
-</div>
 
-</div>
-</div>
-
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
+
 <script>
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAEi0TAhr6muNWqIfmESrIxXvkzv7rLWqc",
-  authDomain: "astroneth-service.firebaseapp.com",
-  databaseURL: "https://astroneth-service-default-rtdb.firebaseio.com",
-  projectId: "astroneth-service",
-  storageBucket: "astroneth-service.firebasestorage.app",
-  messagingSenderId: "893245021132",
-  appId: "1:893245021132:web:93d9086b0f11933b3e1b69"
+
+  apiKey:
+    "AIzaSyBa4wgXLyF0SsuvsQoLQ2tIr-RdIDEmuoA",
+
+  authDomain:
+    "astroneth-service.firebaseapp.com",
+
+  databaseURL:
+    "https://astroneth-service-default-rtdb.firebaseio.com",
+
+  projectId:
+    "astroneth-service",
+
+  storageBucket:
+    "astroneth-service.firebasestorage.app",
+
+  messagingSenderId:
+    "893245021132",
+
+  appId:
+    "1:893245021132:web:93d9d86b0f11933b3e1b69"
+
 };
+
 
 firebase.initializeApp(firebaseConfig);
 
+
 const auth = firebase.auth();
+
 const db = firebase.database();
 
-/* তোমার Firebase Admin UID */
-const ADMIN_UID = "bBN4d5txDrcyfY5itBz2PBtgXlm2";
+
+/* ADMIN UID */
+
+const ADMIN_UID =
+  "bBN4d5txDrcyfY5itBz2PBtgXlm2";
+
+
+/* AUTH STATE */
 
 auth.onAuthStateChanged(async user => {
 
   if(!user){
-    document.getElementById("loginBox").classList.remove("hidden");
-    document.getElementById("adminBox").classList.add("hidden");
+
+    document
+      .getElementById("loginBox")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("adminBox")
+      .classList.add("hidden");
+
     return;
   }
+
+
+  /* CHECK ADMIN */
 
   if(user.uid !== ADMIN_UID){
 
-    document.getElementById("loginMsg").innerText =
+    document
+      .getElementById("loginMsg")
+      .innerText =
       "এই account Admin নয়।";
 
     await auth.signOut();
+
     return;
   }
 
-  document.getElementById("loginBox").classList.add("hidden");
-  document.getElementById("adminBox").classList.remove("hidden");
-  document.getElementById("adminEmail").innerText =
+
+  /* SHOW ADMIN */
+
+  document
+    .getElementById("loginBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("adminBox")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("adminEmail")
+    .innerText =
     "Logged in: " + user.email;
 
+
   loadServices();
+
 });
+
+
+/* LOGIN */
 
 function login(){
 
   const email =
-    document.getElementById("email").value.trim();
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
 
   const password =
-    document.getElementById("password").value;
+    document
+      .getElementById("password")
+      .value;
 
-  document.getElementById("loginMsg").innerText =
+
+  document
+    .getElementById("loginMsg")
+    .innerText =
     "Login হচ্ছে...";
 
-  auth.signInWithEmailAndPassword(email,password)
-  .catch(error => {
 
-    document.getElementById("loginMsg").innerText =
-      "Login ব্যর্থ: " + error.message;
-  });
+  auth
+    .signInWithEmailAndPassword(
+      email,
+      password
+    )
+
+    .catch(error => {
+
+      document
+        .getElementById("loginMsg")
+        .innerText =
+        "Login ব্যর্থ: " +
+        error.message;
+
+    });
+
 }
+
+
+/* LOGOUT */
 
 function logout(){
+
   auth.signOut();
+
 }
+
+
+/* ADD SERVICE */
 
 function addService(){
 
   const name =
-    document.getElementById("name").value.trim();
+    document
+      .getElementById("name")
+      .value
+      .trim();
+
 
   const short =
-    document.getElementById("short").value.trim();
+    document
+      .getElementById("short")
+      .value
+      .trim();
+
 
   const full =
-    document.getElementById("full").value.trim();
+    document
+      .getElementById("full")
+      .value
+      .trim();
+
 
   const image =
-    document.getElementById("image").value.trim();
+    document
+      .getElementById("image")
+      .value
+      .trim();
+
 
   const button =
-    document.getElementById("button").value.trim();
+    document
+      .getElementById("button")
+      .value
+      .trim();
+
 
   const url =
-    document.getElementById("url").value.trim();
+    document
+      .getElementById("url")
+      .value
+      .trim();
+
 
   if(!name){
-    document.getElementById("addMsg").innerText =
+
+    document
+      .getElementById("addMsg")
+      .innerText =
       "Service Name দিন।";
+
     return;
   }
 
-  const id = db.ref("services").push().key;
 
-  db.ref("services/" + id).set({
-    name:name,
-    short:short,
-    full:full,
-    image:image,
-    button:button,
-    url:url,
-    active:true,
-    createdAt:Date.now()
-  })
-  .then(() => {
+  const id =
+    db.ref("services").push().key;
 
-    document.getElementById("addMsg").innerText =
-      "✅ Service সফলভাবে যোগ হয়েছে।";
 
-    document.getElementById("name").value="";
-    document.getElementById("short").value="";
-    document.getElementById("full").value="";
-    document.getElementById("image").value="";
-    document.getElementById("url").value="";
+  db
+    .ref("services/" + id)
+    .set({
 
-  })
-  .catch(error => {
+      name:name,
 
-    document.getElementById("addMsg").innerText =
-      "❌ Error: " + error.message;
-  });
+      short:short,
+
+      full:full,
+
+      image:image,
+
+      button:button,
+
+      url:url,
+
+      active:true,
+
+      createdAt:Date.now()
+
+    })
+
+
+    .then(() => {
+
+      document
+        .getElementById("addMsg")
+        .innerText =
+        "✅ Service সফলভাবে যোগ হয়েছে।";
+
+
+      document
+        .getElementById("name")
+        .value = "";
+
+
+      document
+        .getElementById("short")
+        .value = "";
+
+
+      document
+        .getElementById("full")
+        .value = "";
+
+
+      document
+        .getElementById("image")
+        .value = "";
+
+
+      document
+        .getElementById("url")
+        .value = "";
+
+    })
+
+
+    .catch(error => {
+
+      document
+        .getElementById("addMsg")
+        .innerText =
+        "❌ Error: " +
+        error.message;
+
+    });
+
 }
+
+
+/* LOAD SERVICES */
 
 function loadServices(){
 
-  db.ref("services").on("value",snapshot => {
+  db
+    .ref("services")
+    .on("value", snapshot => {
 
-    const box = document.getElementById("services");
 
-    box.innerHTML="";
+      const box =
+        document.getElementById("services");
 
-    if(!snapshot.exists()){
-      box.innerHTML="<p>এখনো কোনো Service নেই।</p>";
-      return;
-    }
 
-    snapshot.forEach(child => {
+      box.innerHTML = "";
 
-      const id = child.key;
-      const s = child.val();
 
-      const div = document.createElement("div");
-      div.className="service";
+      if(!snapshot.exists()){
 
-      div.innerHTML = `
-        ${s.image ? `<img src="${escapeHtml(s.image)}">` : ""}
+        box.innerHTML =
+          "<p>এখনো কোনো Service নেই।</p>";
 
-        <h3>${escapeHtml(s.name || "")}</h3>
+        return;
 
-        <p>${escapeHtml(s.short || "")}</p>
+      }
 
-        <p>
-          <b>Status:</b>
-          ${s.active ? "🟢 Active" : "🔴 Hidden"}
-        </p>
 
-        <button onclick="toggleService('${id}',${!!s.active})">
-          ${s.active ? "Hide" : "Show"}
-        </button>
+      snapshot.forEach(child => {
 
-        <button class="danger"
-          onclick="deleteService('${id}')">
-          Delete
-        </button>
-      `;
 
-      box.appendChild(div);
+        const id =
+          child.key;
+
+
+        const s =
+          child.val();
+
+
+        const div =
+          document.createElement("div");
+
+
+        div.className =
+          "service";
+
+
+        div.innerHTML = `
+
+          ${
+            s.image
+            ?
+            `<img src="${escapeHtml(s.image)}">`
+            :
+            ""
+          }
+
+
+          <h3>
+            ${escapeHtml(s.name || "")}
+          </h3>
+
+
+          <p>
+            ${escapeHtml(s.short || "")}
+          </p>
+
+
+          <p>
+
+            <b>Status:</b>
+
+            ${
+              s.active
+              ?
+              "🟢 Active"
+              :
+              "🔴 Hidden"
+            }
+
+          </p>
+
+
+          <button
+            onclick="toggleService(
+              '${id}',
+              ${!!s.active}
+            )"
+          >
+
+            ${
+              s.active
+              ?
+              "Hide"
+              :
+              "Show"
+            }
+
+          </button>
+
+
+          <button
+            class="danger"
+            onclick="deleteService('${id}')"
+          >
+
+            Delete
+
+          </button>
+
+        `;
+
+
+        box.appendChild(div);
+
+      });
+
     });
-  });
+
 }
+
+
+/* SHOW / HIDE */
 
 function toggleService(id,current){
 
-  db.ref("services/"+id+"/active")
+  db
+    .ref(
+      "services/" +
+      id +
+      "/active"
+    )
+
     .set(!current);
+
 }
+
+
+/* DELETE */
 
 function deleteService(id){
 
-  if(!confirm("এই Service delete করবেন?")) return;
+  if(
+    !confirm(
+      "এই Service delete করবেন?"
+    )
+  ){
 
-  db.ref("services/"+id).remove();
+    return;
+
+  }
+
+
+  db
+    .ref(
+      "services/" +
+      id
+    )
+
+    .remove();
+
 }
+
+
+/* HTML SECURITY */
 
 function escapeHtml(text){
 
   return String(text)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
 }
+
 </script>
 
 </body>
