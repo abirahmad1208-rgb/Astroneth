@@ -1,12 +1,310 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astroneth</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Astroneth Service</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,sans-serif;
+  background:#07111f;
+  color:#fff;
+}
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(7,17,31,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #18304d;
+  padding:18px 7%;
+  display:flex;justify-content:space-between;align-items:center
+}
+.logo{font-size:24px;font-weight:bold;color:#48a9ff}
+nav a{
+  color:#fff;text-decoration:none;margin-left:20px;
+  opacity:.85
+}
+.hero{
+  min-height:70vh;
+  display:flex;align-items:center;
+  padding:70px 7%;
+  background:radial-gradient(circle at 80% 20%,#123b66 0,#07111f 45%)
+}
+.hero h1{font-size:clamp(42px,7vw,78px);margin-bottom:20px}
+.hero h1 span{color:#48a9ff}
+.hero p{
+  max-width:650px;color:#aebed0;
+  font-size:18px;line-height:1.8
+}
+.btn{
+  display:inline-block;margin-top:28px;
+  padding:14px 25px;border-radius:10px;
+  background:#168cff;color:white;
+  text-decoration:none;border:0;cursor:pointer;
+  font-size:16px;font-weight:bold
+}
+section{padding:80px 7%}
+.title{text-align:center;margin-bottom:45px}
+.title h2{font-size:38px}
+.title p{color:#8fa4bb;margin-top:10px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px
+}
+.card{
+  background:#0c1b2d;
+  border:1px solid #1b3857;
+  border-radius:18px;
+  overflow:hidden;
+  transition:.25s
+}
+.card:hover{
+  transform:translateY(-5px);
+  border-color:#168cff
+}
+.card img{
+  width:100%;height:180px;object-fit:cover;
+  background:#10243a
+}
+.card-body{padding:22px}
+.card h3{font-size:22px;margin-bottom:10px}
+.card p{color:#9fb1c5;line-height:1.6}
+.details{
+  display:none;
+  min-height:70vh;
+  padding:70px 7%
+}
+.details img{
+  width:100%;max-width:700px;
+  border-radius:18px;margin:25px 0
+}
+.details p{
+  color:#b7c5d4;
+  line-height:1.9;
+  max-width:850px
+}
+.features{
+  margin:25px 0;
+  padding-left:20px;
+  color:#b7c5d4;
+  line-height:2
+}
+.about{
+  background:#09192a;
+  text-align:center
+}
+.about p{
+  max-width:800px;
+  margin:auto;
+  color:#aebed0;
+  line-height:1.8
+}
+footer{
+  padding:30px 7%;
+  text-align:center;
+  color:#71869d;
+  border-top:1px solid #18304d
+}
+.empty{
+  text-align:center;
+  color:#71869d;
+  padding:40px
+}
+</style>
 </head>
+
 <body>
-  <h1>Welcome to Astroneth 🚀</h1>
-  <p>আমার ওয়েবসাইট সফলভাবে লাইভ হয়েছে!</p>
+
+<header>
+  <div class="logo">ASTRONETH</div>
+  <nav>
+    <a href="#home">হোম</a>
+    <a href="#services">সার্ভিস</a>
+    <a href="#about">আমাদের সম্পর্কে</a>
+  </nav>
+</header>
+
+<main id="home">
+
+<section class="hero">
+  <div>
+    <h1>আপনার জন্য <span>সেরা সার্ভিস</span></h1>
+    <p>
+      Astroneth-এর মাধ্যমে সহজ, দ্রুত এবং নির্ভরযোগ্য
+      ডিজিটাল সার্ভিস ব্যবহার করুন।
+    </p>
+    <a href="#services" class="btn">সার্ভিস দেখুন</a>
+  </div>
+</section>
+
+<section id="services">
+  <div class="title">
+    <h2>আমাদের সার্ভিসসমূহ</h2>
+    <p>আপনার প্রয়োজন অনুযায়ী সার্ভিস বেছে নিন</p>
+  </div>
+
+  <div id="serviceGrid" class="grid">
+    <div class="empty">সার্ভিস লোড হচ্ছে...</div>
+  </div>
+</section>
+
+<section id="serviceDetails" class="details">
+  <button class="btn" onclick="showServices()">← ফিরে যান</button>
+
+  <h1 id="detailTitle" style="margin-top:30px"></h1>
+
+  <img id="detailImage" src="" alt="">
+
+  <p id="detailDescription"></p>
+
+  <ul id="detailFeatures" class="features"></ul>
+
+  <a id="useButton" class="btn" href="#" target="_blank">
+    ব্যবহার করে দেখুন
+  </a>
+</section>
+
+<section id="about" class="about">
+  <div class="title">
+    <h2>আমাদের সম্পর্কে</h2>
+  </div>
+
+  <p>
+    Astroneth একটি আধুনিক ডিজিটাল সার্ভিস প্ল্যাটফর্ম।
+    আমাদের লক্ষ্য হলো ব্যবহারকারীদের জন্য সহজ এবং
+    সুন্দর অভিজ্ঞতা তৈরি করা।
+  </p>
+</section>
+
+</main>
+
+<footer>
+  © 2026 Astroneth. All Rights Reserved.
+</footer>
+
+<script type="module">
+
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAEi0TAhr6muNWqIfmESrIxXvkzv7rLWqc",
+  authDomain: "astroneth-service.firebaseapp.com",
+  databaseURL: "https://astroneth-service-default-rtdb.firebaseio.com",
+  projectId: "astroneth-service",
+  storageBucket: "astroneth-service.firebasestorage.app",
+  messagingSenderId: "893245021132",
+  appId: "1:893245021132:web:93d908b0f11933b3e1b69"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const servicesRef = ref(db,"services");
+
+onValue(servicesRef,(snapshot)=>{
+
+  const data=snapshot.val() || {};
+  const grid=document.getElementById("serviceGrid");
+
+  grid.innerHTML="";
+
+  const services=Object.entries(data);
+
+  if(!services.length){
+    grid.innerHTML=
+      '<div class="empty">এখনো কোনো সার্ভিস যোগ করা হয়নি।</div>';
+    return;
+  }
+
+  services
+  .sort((a,b)=>(a[1].order||0)-(b[1].order||0))
+  .forEach(([id,s])=>{
+
+    if(s.visible===false) return;
+
+    const card=document.createElement("div");
+    card.className="card";
+
+    card.innerHTML=`
+      <img src="${s.image || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80'}">
+      <div class="card-body">
+        <h3>${escapeHTML(s.name || "Service")}</h3>
+        <p>${escapeHTML(s.shortDescription || "")}</p>
+
+        <button class="btn" onclick='openService(${JSON.stringify(s)})'>
+          বিস্তারিত দেখুন
+        </button>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+
+});
+
+window.openService=function(s){
+
+  document.getElementById("services").style.display="none";
+  document.getElementById("serviceDetails").style.display="block";
+
+  document.getElementById("detailTitle").textContent=s.name || "";
+
+  document.getElementById("detailImage").src=
+    s.image || "";
+
+  document.getElementById("detailDescription").textContent=
+    s.fullDescription || s.shortDescription || "";
+
+  const features=
+    document.getElementById("detailFeatures");
+
+  features.innerHTML="";
+
+  if(Array.isArray(s.features)){
+    s.features.forEach(f=>{
+      const li=document.createElement("li");
+      li.textContent=f;
+      features.appendChild(li);
+    });
+  }
+
+  const button=document.getElementById("useButton");
+
+  button.textContent=s.buttonText || "ব্যবহার করে দেখুন";
+  button.href=s.useUrl || "#";
+
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+window.showServices=function(){
+
+  document.getElementById("serviceDetails").style.display="none";
+  document.getElementById("services").style.display="block";
+
+  location.hash="services";
+};
+
+function escapeHTML(text){
+
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+</script>
+
 </body>
 </html>
