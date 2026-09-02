@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Astroneth Admin Panel</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#07111f;
+  color:#fff;
+}
+header{
+  padding:20px 7%;
+  background:#0b1b2e;
+  border-bottom:1px solid #1d3957;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{font-size:24px;font-weight:bold;color:#48a9ff}
+button{
+  border:0;
+  border-radius:9px;
+  padding:12px 18px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.primary{background:#168cff;color:white}
+.danger{background:#dc3545;color:white}
+.secondary{background:#263b52;color:white}
+
+.container{
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 20px;
+}
+.panel{
+  background:#0c1b2d;
+  border:1px solid #1b3857;
+  border-radius:18px;
+  padding:25px;
+  margin-bottom:25px;
+}
+h1,h2{margin-top:0}
+label{
+  display:block;
+  margin:15px 0 7px;
+  color:#aebed0;
+}
+input,textarea{
+  width:100%;
+  padding:13px;
+  border-radius:9px;
+  border:1px solid #294764;
+  background:#07111f;
+  color:white;
+  outline:none;
+}
+textarea{min-height:120px;resize:vertical}
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+.service{
+  border:1px solid #23435f;
+  border-radius:14px;
+  padding:18px;
+  margin-top:15px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:center;
+}
+.service-info{flex:1}
+.service-info h3{margin:0 0 8px}
+.service-info p{color:#9fb1c5;margin:0}
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.hidden{display:none}
+.status{
+  padding:12px;
+  border-radius:9px;
+  background:#102b42;
+  margin-bottom:20px;
+  color:#9ed0ff;
+}
+@media(max-width:700px){
+  .row{grid-template-columns:1fr}
+  .service{flex-direction:column;align-items:stretch}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ASTRONETH ADMIN</div>
+  <button id="logoutBtn" class="secondary hidden">Logout</button>
+</header>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="loginPanel" class="panel">
+
+  <h1>Admin Login</h1>
+
+  <p style="color:#9fb1c5">
+    শুধুমাত্র অনুমোদিত Admin account দিয়ে প্রবেশ করুন।
+  </p>
+
+  <label>Email</label>
+  <input id="email" type="email" placeholder="Admin Email">
+
+  <label>Password</label>
+  <input id="password" type="password" placeholder="Password">
+
+  <button id="loginBtn" class="primary" style="margin-top:20px">
+    Login
+  </button>
+
+  <p id="loginError" style="color:#ff7070"></p>
+
+</div>
+
+
+<!-- ADMIN -->
+<div id="adminPanel" class="hidden">
+
+  <div class="status" id="status">
+    Admin Panel চালু হয়েছে।
+  </div>
+
+  <div class="panel">
+
+    <h2 id="formTitle">নতুন সার্ভিস যোগ করুন</h2>
+
+    <input type="hidden" id="serviceId">
+
+    <label>সার্ভিসের নাম</label>
+    <input id="name" placeholder="যেমন: Web Development">
+
+    <label>Short Description</label>
+    <textarea id="shortDescription"
+      placeholder="ছোট description"></textarea>
+
+    <label>Full Description</label>
+    <textarea id="fullDescription"
+      placeholder="সম্পূর্ণ description"></textarea>
+
+    <label>Image URL</label>
+    <input id="image"
+      placeholder="https://example.com/image.jpg">
+
+    <label>Features</label>
+    <textarea id="features"
+      placeholder="প্রথম সুবিধা&#10;দ্বিতীয় সুবিধা&#10;তৃতীয় সুবিধা"></textarea>
+
+    <div class="row">
+
+      <div>
+        <label>Button Text</label>
+        <input id="buttonText"
+          value="ব্যবহার করে দেখুন">
+      </div>
+
+      <div>
+        <label>Use URL</label>
+        <input id="useUrl"
+          placeholder="https://example.com">
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div>
+        <label>Order</label>
+        <input id="order" type="number" value="1">
+      </div>
+
+      <div>
+        <label>Visible?</label>
+        <select id="visible"
+          style="width:100%;padding:13px;border-radius:9px;background:#07111f;color:white;border:1px solid #294764">
+          <option value="true">হ্যাঁ</option>
+          <option value="false">না</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div style="margin-top:20px">
+
+      <button id="saveBtn" class="primary">
+        সার্ভিস Save করুন
+      </button>
+
+      <button id="cancelBtn"
+        class="secondary hidden"
+        style="margin-left:8px">
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <h2>আমাদের সার্ভিসসমূহ</h2>
+
+    <div id="serviceList">
+      Loading...
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  getDatabase,
+  ref,
+  get,
+  set,
+  remove,
+  onValue,
+  push
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyAEi0TAhr6muNWqIfmESrIxXvkzv7rLWqc",
+
+  authDomain: "astroneth-service.firebaseapp.com",
+
+  databaseURL:
+  "https://astroneth-service-default-rtdb.firebaseio.com",
+
+  projectId: "astroneth-service",
+
+  storageBucket:
+  "astroneth-service.firebasestorage.app",
+
+  messagingSenderId: "893245021132",
+
+  appId:
+  "1:893245021132:web:93d908b0f11933b3e1b69"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getDatabase(app);
+
+
+// ELEMENTS
+
+const loginPanel =
+document.getElementById("loginPanel");
+
+const adminPanel =
+document.getElementById("adminPanel");
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+
+// LOGIN
+
+document.getElementById("loginBtn")
+.addEventListener("click",async()=>{
+
+  const email =
+  document.getElementById("email").value.trim();
+
+  const password =
+  document.getElementById("password").value;
+
+  const error =
+  document.getElementById("loginError");
+
+  error.textContent="";
+
+  if(!email || !password){
+
+    error.textContent="Email এবং Password দিন।";
+    return;
+
+  }
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(e){
+
+    error.textContent=
+    "Login ব্যর্থ হয়েছে। Email/Password ঠিক আছে কিনা দেখুন।";
+
+  }
+
+});
+
+
+// AUTH CHECK
+
+onAuthStateChanged(auth,async(user)=>{
+
+  if(!user){
+
+    loginPanel.classList.remove("hidden");
+    adminPanel.classList.add("hidden");
+    logoutBtn.classList.add("hidden");
+
+    return;
+
+  }
+
+
+  // CHECK ADMIN
+
+  const adminRef =
+  ref(db,"admins/"+user.uid);
+
+  const snapshot =
+  await get(adminRef);
+
+
+  if(snapshot.val() !== true){
+
+    await signOut(auth);
+
+    document.getElementById("loginError")
+    .textContent=
+    "এই account-এর Admin permission নেই।";
+
+    return;
+
+  }
+
+
+  loginPanel.classList.add("hidden");
+
+  adminPanel.classList.remove("hidden");
+
+  logoutBtn.classList.remove("hidden");
+
+  loadServices();
+
+});
+
+
+// LOGOUT
+
+logoutBtn.addEventListener("click",()=>{
+
+  signOut(auth);
+
+});
+
+
+// SAVE SERVICE
+
+document.getElementById("saveBtn")
+.addEventListener("click",async()=>{
+
+  const id =
+  document.getElementById("serviceId").value;
+
+  const name =
+  document.getElementById("name").value.trim();
+
+  if(!name){
+
+    alert("সার্ভিসের নাম দিন।");
+    return;
+
+  }
+
+
+  const featureText =
+  document.getElementById("features").value;
+
+  const features =
+  featureText
+  .split("\n")
+  .map(x=>x.trim())
+  .filter(Boolean);
+
+
+  const data={
+
+    name:name,
+
+    shortDescription:
+    document.getElementById("shortDescription").value,
+
+    fullDescription:
+    document.getElementById("fullDescription").value,
+
+    image:
+    document.getElementById("image").value,
+
+    features:features,
+
+    buttonText:
+    document.getElementById("buttonText").value
+    || "ব্যবহার করে দেখুন",
+
+    useUrl:
+    document.getElementById("useUrl").value,
+
+    order:
+    Number(document.getElementById("order").value)||1,
+
+    visible:
+    document.getElementById("visible").value === "true"
+
+  };
+
+
+  try{
+
+    let serviceRef;
+
+    if(id){
+
+      serviceRef =
+      ref(db,"services/"+id);
+
+    }else{
+
+      serviceRef =
+      push(ref(db,"services"));
+
+    }
+
+
+    await set(serviceRef,data);
+
+    alert("সার্ভিস সফলভাবে Save হয়েছে! ✅");
+
+    clearForm();
+
+  }catch(error){
+
+    alert(
+      "Save হয়নি: "+error.message
+    );
+
+  }
+
+});
+
+
+// LOAD SERVICES
+
+function loadServices(){
+
+  const servicesRef =
+  ref(db,"services");
+
+  onValue(servicesRef,(snapshot)=>{
+
+    const data =
+    snapshot.val() || {};
+
+    const list =
+    document.getElementById("serviceList");
+
+    list.innerHTML="";
+
+    const entries =
+    Object.entries(data)
+    .sort((a,b)=>
+      (a[1].order||0)-(b[1].order||0)
+    );
+
+
+    if(!entries.length){
+
+      list.innerHTML=
+      '<p style="color:#71869d">কোনো সার্ভিস নেই।</p>';
+
+      return;
+
+    }
+
+
+    entries.forEach(([id,s])=>{
+
+      const div =
+      document.createElement("div");
+
+      div.className="service";
+
+
+      div.innerHTML=`
+
+        <div class="service-info">
+
+          <h3>
+            ${escapeHTML(s.name || "Unnamed")}
+          </h3>
+
+          <p>
+            ${escapeHTML(
+              s.shortDescription || ""
+            )}
+          </p>
+
+          <small style="color:#71869d">
+            ${s.visible === false
+              ? "Hidden"
+              : "Visible"}
+          </small>
+
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="primary"
+            data-edit="${id}">
+            Edit
+          </button>
+
+          <button
+            class="danger"
+            data-delete="${id}">
+            Delete
+          </button>
+
+        </div>
+
+      `;
+
+
+      list.appendChild(div);
+
+    });
+
+
+    // EDIT
+
+    document
+    .querySelectorAll("[data-edit]")
+    .forEach(btn=>{
+
+      btn.addEventListener("click",()=>{
+
+        editService(
+          btn.dataset.edit,
+          data[btn.dataset.edit]
+        );
+
+      });
+
+    });
+
+
+    // DELETE
+
+    document
+    .querySelectorAll("[data-delete]")
+    .forEach(btn=>{
+
+      btn.addEventListener("click",async()=>{
+
+        const id =
+        btn.dataset.delete;
+
+        if(!confirm(
+          "এই সার্ভিসটি Delete করতে চান?"
+        )) return;
+
+
+        await remove(
+          ref(db,"services/"+id)
+        );
+
+      });
+
+    });
+
+  });
+
+}
+
+
+// EDIT
+
+function editService(id,s){
+
+  document.getElementById("serviceId")
+  .value=id;
+
+  document.getElementById("name")
+  .value=s.name || "";
+
+  document.getElementById("shortDescription")
+  .value=s.shortDescription || "";
+
+  document.getElementById("fullDescription")
+  .value=s.fullDescription || "";
+
+  document.getElementById("image")
+  .value=s.image || "";
+
+  document.getElementById("features")
+  .value=
+  Array.isArray(s.features)
+  ? s.features.join("\n")
+  : "";
+
+  document.getElementById("buttonText")
+  .value=
+  s.buttonText || "ব্যবহার করে দেখুন";
+
+  document.getElementById("useUrl")
+  .value=s.useUrl || "";
+
+  document.getElementById("order")
+  .value=s.order || 1;
+
+  document.getElementById("visible")
+  .value=
+  s.visible === false
+  ? "false"
+  : "true";
+
+
+  document.getElementById("formTitle")
+  .textContent="সার্ভিস Edit করুন";
+
+  document.getElementById("cancelBtn")
+  .classList.remove("hidden");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+// CLEAR
+
+function clearForm(){
+
+  document.getElementById("serviceId")
+  .value="";
+
+  document.getElementById("name")
+  .value="";
+
+  document.getElementById("shortDescription")
+  .value="";
+
+  document.getElementById("fullDescription")
+  .value="";
+
+  document.getElementById("image")
+  .value="";
+
+  document.getElementById("features")
+  .value="";
+
+  document.getElementById("buttonText")
+  .value="ব্যবহার করে দেখুন";
+
+  document.getElementById("useUrl")
+  .value="";
+
+  document.getElementById("order")
+  .value=1;
+
+  document.getElementById("visible")
+  .value="true";
+
+  document.getElementById("formTitle")
+  .textContent=
+  "নতুন সার্ভিস যোগ করুন";
+
+  document.getElementById("cancelBtn")
+  .classList.add("hidden");
+
+}
+
+
+document.getElementById("cancelBtn")
+.addEventListener("click",clearForm);
+
+
+// HTML ESCAPE
+
+function escapeHTML(text){
+
+  return String(text)
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
